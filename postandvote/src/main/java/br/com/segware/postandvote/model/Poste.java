@@ -1,6 +1,5 @@
 package br.com.segware.postandvote.model;
 
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +23,7 @@ public class Poste {
 	private String texto;
 
 	// os "upvotes"
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "poste")
-	private List<Aprovacao> aprovacoes;
+	private Long numeroDeAprovacoes = 0l;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")
@@ -57,14 +54,19 @@ public class Poste {
 	}
 
 	
-	public List<Aprovacao> getAprovacoes() {
-		return aprovacoes;
+
+	public Long getNumeroDeAprovacoes() {
+		return numeroDeAprovacoes;
+	}
+
+	public void setNumeroDeAprovacoes(Long numeroAprovacoes) {
+		this.numeroDeAprovacoes = numeroAprovacoes;
 	}
 
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
+	
 	
 	@Override
 	public int hashCode() {
@@ -81,6 +83,10 @@ public class Poste {
 			return false;
 		Poste other = (Poste) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	public void incrementarNumeroDeAprovacoes() {
+		this.numeroDeAprovacoes++;
 	}
 	
 	

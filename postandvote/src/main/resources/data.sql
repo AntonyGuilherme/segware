@@ -4,5 +4,5 @@ INSERT INTO usuarios(nome_de_usuario, senha) VALUES('admin', '$2a$10$sFKmbxbG4ry
 INSERT INTO perfis(id, nome) VALUES(1, 'ROLE_CLIENTE');
 INSERT INTO perfis(id, nome) VALUES(2, 'ROLE_ADMIN');
 
-INSERT INTO usuarios_perfis(id_usuario, id_perfil) VALUES(1, 1);
-INSERT INTO usuarios_perfis(id_usuario, id_perfil) VALUES(2, 2);
+INSERT INTO usuarios_perfis(id_usuario, id_perfil) VALUES('cliente', 1);
+INSERT INTO usuarios_perfis(id_usuario, id_perfil) VALUES('admin', 2);
