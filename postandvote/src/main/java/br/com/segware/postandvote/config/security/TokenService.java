@@ -34,7 +34,7 @@ public class TokenService {
 		
 		return Jwts.builder()
 				.setIssuer("API do Fórum da Alura")
-				.setSubject(usuarioLogado.getId().toString())
+				.setSubject(usuarioLogado.getNomeDeUsuario())
 				.setIssuedAt(dataAtual)
 				.setExpiration(dataExpiracao)
 				.signWith(SignatureAlgorithm.HS256, segredoParaGeracaoDoToken)
@@ -58,13 +58,13 @@ public class TokenService {
 		}
 	}
 
-	public Long getIdUsuario(String token) {
+	public String getNomeDeUsuario(String token) {
 		
 		Claims claims = Jwts.parser()
 				.setSigningKey(this.segredoParaGeracaoDoToken)
 				.parseClaimsJws(token).getBody();
 		
-		return Long.parseLong(claims.getSubject());
+		return claims.getSubject();
 	}
 	
 	

@@ -2,13 +2,13 @@ package br.com.segware.postandvote.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -27,22 +27,17 @@ public class Usuario implements UserDetails {
 	private static final long serialVersionUID = 5713148853138748061L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	private Long id;
-	
 	private String nomeDeUsuario;
+	
 	private String senha;
 	
-	@ManyToMany(fetch= FetchType.EAGER)
+	@ManyToMany(fetch= FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(
 			name="usuarios_perfis",
 			joinColumns = { @JoinColumn(name="id_usuario") },
 			inverseJoinColumns = { @JoinColumn(name="id_perfil") }
 			)
 	private List<Perfil> perfis = new ArrayList<>();
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	private List<Aprovacao> aprovacoes;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	private List<Poste> postes = new ArrayList<Poste>();
@@ -54,24 +49,31 @@ public class Usuario implements UserDetails {
 		this.senha = senha;
 	}
 	
-	public Long getId() {
-		return id;
+	public Usuario(String nomeDeUsuario, String senha, Perfil perfil) {
+		this.nomeDeUsuario = nomeDeUsuario;
+		this.senha = senha;
+		this.perfis.add(perfil);
 	}
+
 	public String getNomeDeUsuario() {
 		return nomeDeUsuario;
 	}
 	public String getSenha() {
 		return senha;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	public void setNomeDeUsuario(String nomeDeUsuario) {
 		this.nomeDeUsuario = nomeDeUsuario;
 	}
+	
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	public List<Perfil> getPerfis() {
+		return Collections.unmodifiableList(this.perfis);
+	}
+	
 
 	
 	@Override
@@ -114,7 +116,7 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(nomeDeUsuario);
 	}
 
 	@Override
@@ -126,8 +128,12 @@ public class Usuario implements UserDetails {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(nomeDeUsuario, other.nomeDeUsuario);
 	}
+
+	
+
+	
 	
 	
 	

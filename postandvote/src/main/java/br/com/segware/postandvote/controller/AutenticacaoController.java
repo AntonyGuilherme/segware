@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.segware.postandvote.config.security.TokenService;
 import br.com.segware.postandvote.controller.dto.TokenDTO;
-import br.com.segware.postandvote.controller.form.LoginForm;
+import br.com.segware.postandvote.controller.form.UsuarioForm;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,7 +29,7 @@ public class AutenticacaoController {
 	
 	
 	@PostMapping
-	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm form) {
+	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid UsuarioForm form) {
 		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 		
 		try {
