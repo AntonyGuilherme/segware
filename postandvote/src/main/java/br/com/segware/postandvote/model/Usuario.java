@@ -31,7 +31,7 @@ public class Usuario implements UserDetails {
 	
 	private String senha;
 	
-	@ManyToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch= FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(
 			name="usuarios_perfis",
 			joinColumns = { @JoinColumn(name="id_usuario") },

@@ -108,12 +108,20 @@ public class PostController {
 			Authentication autenticacao
 			){
 		
-		
+		String nomeDeUsuario = autenticacao.getName();
 		Optional<Poste> possivelPoste = this.posteRepository.findById(id);
 		
 		if(possivelPoste.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
+		
+		String nomeDoUsuarioDoPoste = possivelPoste.get().getUsuario().getNomeDeUsuario();
+		
+		if(!nomeDeUsuario.equals(nomeDoUsuarioDoPoste)) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		
+		
 		
 		Long idPoste = possivelPoste.get().getId();
 		
@@ -135,6 +143,7 @@ public class PostController {
 		String nomeDeUsuario = autenticacao.getName();
 		
 		Optional<Poste> possivelPoste = this.posteRepository.findById(id);
+		
 		
 		if(possivelPoste.isEmpty()) {
 			return ResponseEntity.notFound().build();

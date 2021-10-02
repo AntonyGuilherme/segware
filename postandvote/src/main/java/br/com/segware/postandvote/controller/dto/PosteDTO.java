@@ -21,8 +21,26 @@ public class PosteDTO {
 		this.numeroDeAprovacoes = poste.getNumeroDeAprovacoes();		
 	}
 
+	public PosteDTO() {}
 	
 	
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	public void setNomeDeUsuario(String nomeDeUsuario) {
+		this.nomeDeUsuario = nomeDeUsuario;
+	}
+
+	public void setNumeroDeAprovacoes(Long numeroDeAprovacoes) {
+		this.numeroDeAprovacoes = numeroDeAprovacoes;
+	}
+
 	public String getTexto() {
 		return texto;
 	}

@@ -17,12 +17,6 @@ public class PosteForm {
 	@NotNull @NotEmpty @Length(max=250)
 	private String texto;
 	
-
-
-	public String getTexto() {
-		return texto;
-	}
-
 	
 	public Poste converterParaPoste(UsuarioRepository usuarioRepository, String nomeDeUsuario) 
 			throws ErroDeFormularioException {
@@ -34,6 +28,18 @@ public class PosteForm {
 		}
 		
 		return new Poste(this.texto,optionalUsuario.get());
+	}
+	
+	
+	
+	public String getTexto() {
+		return texto;
+	}
+
+
+
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 	
 
