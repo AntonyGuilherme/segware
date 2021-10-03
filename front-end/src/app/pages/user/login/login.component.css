@@ -1,0 +1,60 @@
+
+.title {
+    font-size: 25px;
+}
+
+
+
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.inputs {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 8px;
+    width: 40%;
+    
+}
+
+.inputs label{
+    font-family: "Oswald", sans-serif;
+    font-weight: bolder;
+    margin-bottom: 4px;
+    margin-left: 4px;
+}
+
+.buttons{
+
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin: 0.5% 4% 0.5% 0.5%;
+    width: 40%;
+
+}
+
+.buttons span{
+    font-family: "Oswald", sans-serif;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ffaa00;
+    transition: 0.1s;
+}
+
+.buttons span:hover{
+    cursor: pointer;
+    color: white;
+    border-bottom: 0.65mm solid #ffaa00 ;
+    transition: 0.1s;
+    
+}
+
+.buttons button{
+    width: 45%;
+}

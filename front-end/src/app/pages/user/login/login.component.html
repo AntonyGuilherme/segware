@@ -1,1 +1,19 @@
-<p>login works!</p>
+<form [formGroup]="formularioLogin" class="container-login">
+
+    <div class="inputs">
+        <label for="nomeDeUsuario"> Nome de Usuário <nb-icon icon="person-outline"></nb-icon> </label>
+        <input id="nomeDeUsuario" formControlName="nomeDeUsuario" type="text" nbInput fullWidth shape="square">
+
+    </div>
+
+    <div class="inputs">
+        <label for="senha">Senha <nb-icon icon="lock-outline"></nb-icon></label>
+        <input id="senha" type="password" formControlName="senha" nbInput fullWidth shape="square">
+    </div>
+
+    <div class="buttons">
+        <button (click)="realizarLogin()"  
+        nbButton status="warning" outline>Entrar</button>
+    </div>
+
+</form>

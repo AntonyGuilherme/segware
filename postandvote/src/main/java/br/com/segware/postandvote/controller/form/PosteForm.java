@@ -14,7 +14,7 @@ import br.com.segware.postandvote.repository.UsuarioRepository;
 
 public class PosteForm {
 	
-	@NotNull @NotEmpty @Length(max=250)
+	@NotNull @NotEmpty @Length(max=250, min = 4)
 	private String texto;
 	
 	

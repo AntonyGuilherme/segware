@@ -1,0 +1,71 @@
+<div class="container-list">
+
+
+    <nb-card class="container-usuario">
+
+        <nb-card-header>
+            Criar Novo Usuário <nb-icon status="success" icon="person-outline"></nb-icon>
+        </nb-card-header>
+
+        <nb-card-body>
+
+            <form [formGroup]="formularioUsuario">
+
+                <div class="inputs">
+                    <label for="nomeDeUsuario">Nome de Usuário (Tamanho : Mínimo 4 caracteres , Máximo 32 caracteres)
+                    </label>
+                    <input id="nomeDeUsuario" type="text" formControlName="nomeDeUsuario" nbInput fullWidth
+                        shape="square" />
+                </div>
+
+                <div class="inputs">
+                    <label for="senha">Senha (Tamanho : Mínimo 4 caracteres , Máximo 32 caracteres) </label>
+                    <input id="senha" type="password" formControlName="senha" nbInput fullWidth shape="square">
+                </div>
+
+                <div class="inputs">
+                    <label for="perfis">Perfil </label>
+                    <nb-select id="perfis" placeholder="Perfis" formControlName="idPerfil">
+                        <nb-option *ngFor="let perfil of perfis" [value]="perfil.id">{{perfil.nome}}</nb-option>
+                    </nb-select>
+                </div>
+
+
+                <div class="buttons">
+                    <button (click)="salvarUsuario()" nbButton status="success" outline>Salvar</button>
+                </div>
+            </form>
+
+        </nb-card-body>
+    </nb-card>
+
+
+    <nb-list class="list" nbInfiniteList listenWindowScroll [threshold]="500"
+        (bottomThreshold)="carregarProximosPostes()">
+        <nb-list-item class="list-iten" *ngFor="let usuario of usuarios">
+
+
+            <nb-card status="info" class="card-usuario">
+                <nb-card-header class="header">
+                    <span>
+                        {{usuario.nomeDeUsuario}} <nb-icon icon="file-outline"></nb-icon>
+                    </span>
+                    <div class="options">
+                        <button 
+                        nbButton (click)="deletarUsuario(usuario)" [disabled]="!permitirExcluir(usuario)"
+                        status="danger" nbTooltip="Excluir" nbTooltipStatus="danger" >
+                            <nb-icon icon="trash-outline"></nb-icon>
+                        </button>
+                    </div>
+                </nb-card-header>
+                <nb-card-body class="card-usuario">
+                    <span>Perfil : {{ usuario?.perfis[0]?.nome }}</span>
+                </nb-card-body>
+
+            </nb-card>
+
+
+        </nb-list-item>
+    </nb-list>
+
+</div>

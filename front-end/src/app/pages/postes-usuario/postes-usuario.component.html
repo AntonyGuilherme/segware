@@ -1,0 +1,52 @@
+<div class="container-list">
+
+
+    <nb-card class="container-poste" >
+
+        <nb-card-header>
+            Criar Novo Poste <nb-icon status="success" icon="file-text-outline"></nb-icon>
+        </nb-card-header>
+
+        <nb-card-body>
+            
+            <form [formGroup]="formularioPoste" >
+                <div class="inputs">
+                    <label for="poste">Tamanho : Mínimo 4 caracteres , Máximo 250 caracteres </label>
+                    <textarea id="poste" type="text" formControlName="texto" nbInput fullWidth shape="square"></textarea>
+                </div>
+                
+                <div class="buttons">
+                <button (click)="salvarPoste()"  
+                nbButton status="success" outline>Salvar</button>
+            </div>
+        </form>
+            
+        </nb-card-body>
+    </nb-card>
+
+
+    <nb-list class="list" nbInfiniteList listenWindowScroll [threshold]="500" (bottomThreshold)="carregarProximosPostes()">
+        <nb-list-item class="list-iten" *ngFor="let poste of postes">
+
+  
+                    <nb-card status="info" class="card-poste">
+                        <nb-card-header class="header">
+                            <span>
+                                {{poste.nomeDeUsuario}} <nb-icon icon="file-outline"></nb-icon>
+                            </span>
+                        </nb-card-header>
+                        <nb-card-body class="card-container">
+                            <span>UpVotes : {{ poste.numeroDeAprovacoes }}</span>
+                            <span>Poste </span>
+                            <p>{{ poste.texto}}</p>
+                        </nb-card-body>
+
+                    </nb-card>
+
+      
+                
+
+        </nb-list-item>
+    </nb-list>
+
+</div>
