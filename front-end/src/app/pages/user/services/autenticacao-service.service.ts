@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Perfil } from 'src/app/models/users/perfil.model';
 import { Usuario } from 'src/app/models/users/usuario.model';
 import { TokenUsuario } from '../../../models/users/token.model';
+import {Perfis} from '../../../models/users/perfil.enum';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AutenticacaoServiceService {
+export class AutenticacaoService {
 
   private readonly url = 'api';
   private readonly JWT_TOKEN = 'JWT_TOKEN';
@@ -66,6 +67,12 @@ export class AutenticacaoServiceService {
 
   public logout(){
     localStorage.clear();
+  }
+
+
+  public buscarPorPermissao(nomePerfil : Perfis) : boolean{
+    return !!this.getPerfisDoUsuarioLogado()
+    .find((perfil) => perfil.nome == nomePerfil);
   }
 
 

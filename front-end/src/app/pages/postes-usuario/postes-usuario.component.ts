@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NbToastrService } from '@nebular/theme';
 import { PosteService } from 'src/app/data-services/poste.service';
 import { Poste } from 'src/app/models/poste/poste.model';
-import { MensagensService } from 'src/app/utils/mensagens/mensagens.service';
-
 @Component({
   selector: 'app-postes-usuario',
   templateUrl: './postes-usuario.component.html',
@@ -26,7 +25,7 @@ export class PostesUsuarioComponent implements OnInit {
 
   constructor(
     private posteService : PosteService,
-    private mensagensService : MensagensService
+    private mensagensService : NbToastrService
   ) { }
   
   async ngOnInit() {
@@ -52,9 +51,8 @@ export class PostesUsuarioComponent implements OnInit {
   async salvarPoste(){
 
     if(this.formularioPoste.invalid){
-      return this.mensagensService.mensagemAlerta(
-        "Atenção!",
-        "Verifique a quantidade de caracteres!");
+      return this.mensagensService.warning(
+         "Verifique a quantidade de caracteres!");
     }
 
     return this.posteService
@@ -64,10 +62,10 @@ export class PostesUsuarioComponent implements OnInit {
       this.formularioPoste.get("texto").setValue(null);
     })
     .then(() => {
-      this.mensagensService.mensagemSucesso("Sucesso!","Poste salvo com suceso!");
+      this.mensagensService.success("Poste salvo com suceso!");
     })
     .catch((error) => {
-      this.mensagensService.mensagemErro("Erro!","Verifique sua conexão!");
+      this.mensagensService.danger("Verifique sua conexão!");
     });
 
   }

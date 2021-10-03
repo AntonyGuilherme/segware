@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutenticacaoServiceService } from '../../user/services/autenticacao-service.service';
+import { Perfis } from 'src/app/models/users/perfil.enum';
+import { Usuario } from 'src/app/models/users/usuario.model';
+import { AutenticacaoService } from '../../user/services/autenticacao-service.service';
 
 @Component({
   selector: 'menu',
@@ -10,7 +12,7 @@ import { AutenticacaoServiceService } from '../../user/services/autenticacao-ser
 export class MenuComponent implements OnInit {
 
   constructor(
-    private autenticacao: AutenticacaoServiceService,
+    private autenticacao: AutenticacaoService,
     private router: Router
   ) { }
 
@@ -30,6 +32,12 @@ export class MenuComponent implements OnInit {
     return this.router.navigate(['/login']);
 
   }
+
+  permitirAcessarOsUsuarios(): boolean {
+    return this.autenticacao
+      .buscarPorPermissao(Perfis.ADMIN);
+  }
+
 
 
 }

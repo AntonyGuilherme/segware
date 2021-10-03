@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AutenticacaoServiceService } from '../services/autenticacao-service.service';
-import { MensagensService } from './../../../utils/mensagens/mensagens.service';
+import { NbToastrService } from '@nebular/theme';
+import { AutenticacaoService} from '../services/autenticacao-service.service';
 
 @Component({
   selector: 'app-login',
@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private route: Router,
-    private autenticacao: AutenticacaoServiceService,
-    private servicoDeMensagem : MensagensService
+    private autenticacao: AutenticacaoService,
+    private servicoDeMensagem : NbToastrService
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   public async realizarLogin(){
     
     if(this.formularioLogin.invalid) return this.servicoDeMensagem
-    .mensagemAlerta('Atenção!','Os valores informados não são válidos.');;
+    .warning('Os valores informados não são válidos.');;
 
    return this.autenticacao
     .login(this.formularioLogin.getRawValue())
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
         return this.route.navigate(['/home']);
       } 
         
-      this.servicoDeMensagem.mensagemErro('Erro No Login!','Error');
+      this.servicoDeMensagem.danger('Usuário não encontrado!');
 
     })
     .catch(error => {

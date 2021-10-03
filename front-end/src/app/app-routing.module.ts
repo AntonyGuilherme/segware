@@ -2,10 +2,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/user/login/login.component';
-import {AutenticacaoGuardGuard} from './pages/user/guards/autenticacao-guard.guard';
+import {AutenticacaoGuard} from './pages/user/guards/autenticacao-guard.guard';
 import {LoginGuard} from './pages/user/guards/login.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { PostesUsuarioComponent } from './pages/postes-usuario/postes-usuario.component';
+import { AdministrarUsuariosComponent } from './pages/administrar-usuarios/administrar-usuarios.component';
 
 const routes: Routes = [
  
@@ -18,14 +19,21 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate:[ AutenticacaoGuardGuard ]
+    canActivate:[ AutenticacaoGuard ]
   },
 
   {
     path : 'postes/usuario',
     component: PostesUsuarioComponent,
-    canActivate:[ AutenticacaoGuardGuard ]
-  }
+    canActivate:[ AutenticacaoGuard ]
+  },
+
+  {
+    path : 'usuarios',
+    component: AdministrarUsuariosComponent,
+    canActivate:[ AutenticacaoGuard ]
+  },
+
 
 ];
 

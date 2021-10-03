@@ -13,6 +13,11 @@
                                 <button nbButton (click)="aprovarPoste(poste)" status="success" nbTooltip="UpVote" nbTooltipStatus="success" >
                                     <nb-icon icon="file-add-outline"></nb-icon>
                                 </button>
+                                <button 
+                                nbButton (click)="deletarPoste(poste)" [disabled]="!permitirExcluir()"
+                                status="danger" nbTooltip="Excluir" nbTooltipStatus="danger" >
+                                    <nb-icon icon="trash-outline"></nb-icon>
+                                </button>
                             </div>
                         </nb-card-header>
                         <nb-card-body class="card-container">

@@ -22,7 +22,6 @@ export class PosteService {
     .toPromise();
     
   }
-  
 
   async buscarPorPostesDoUsuario(pagina : number = 0 , quantidade : number = 4){
 
@@ -47,6 +46,12 @@ export class PosteService {
   async salvarPoste(novoPoste: { texto : string }) {
     return this.http.post<Poste>(`/api/poste`,novoPoste)
     .toPromise();
+  }
+
+  async deletarPoste(id : number){
+
+    return this.http.delete<void>(`api/poste/${id}`).toPromise();
+
   }
   
 }

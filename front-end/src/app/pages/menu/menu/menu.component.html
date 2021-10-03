@@ -12,7 +12,7 @@
         <nb-icon routerLink="postes/usuario" id="postes_usuario" icon="file-text-outline"></nb-icon>
         <label for="postes_usuario">Seus Postes</label>
       </div>
-      <div class="menu-item">
+      <div *ngIf="permitirAcessarOsUsuarios()" class="menu-item">
         <nb-icon routerLink="usuarios" id="usuarios" icon="person-outline"></nb-icon>
         <label for="usuarios">Usuários</label>
       </div>
