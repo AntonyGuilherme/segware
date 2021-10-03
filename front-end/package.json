@@ -22,8 +22,11 @@
     "@angular/router": "~10.0.6",
     "@nebular/eva-icons": "6.2.2",
     "@nebular/theme": "^6.2.2",
+    "@sweetalert2/ngx-sweetalert2": "^10.0.0",
+    "@sweetalert2/theme-dark": "^5.0.5",
     "eva-icons": "^1.1.2",
     "rxjs": "~6.5.5",
+    "sweetalert2": "^11.1.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

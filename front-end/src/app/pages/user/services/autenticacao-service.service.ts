@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Perfil } from 'src/app/models/users/perfil.model';
+import { Usuario } from 'src/app/models/users/usuario.model';
+import { TokenUsuario } from '../../../models/users/token.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,48 +11,63 @@ export class AutenticacaoServiceService {
 
   private readonly url = 'api';
   private readonly JWT_TOKEN = 'JWT_TOKEN';
-
-  private nomeDeUsuarioLogado : string = null;
+  private readonly NOME_DE_USUARIO = 'NOME_DE_USUARIO';
+  private readonly PERFIS = 'PERFIS';
 
   constructor(private http: HttpClient) { }
 
   public usuarioEstaLogado() : boolean {
-    return false;
+    return !!this.getToken();
   }
 
 
-  public async login(usuario : { nomeDeUsuario : string , senha : string }) : Promise<any>{
+  public async login(usuario : Usuario) : Promise<boolean>{
 
-    return this.http.post(`${this.url}/auth`,usuario)
+    return this.http.post<TokenUsuario>(`${this.url}/auth`,usuario)
     .toPromise()
-    .then((token) => this.guardarDadosDoUsuario(usuario.nomeDeUsuario,token))
+    .then((token) => this.guardarDadosDoUsuario(token))
     .then(() => true )
     .catch(() => false);
 
   }
 
 
-  private guardarDadosDoUsuario(nomeDeUsuario : string, token: any) : void{
+  private guardarDadosDoUsuario(token: TokenUsuario) : void{
 
-    this.nomeDeUsuarioLogado = nomeDeUsuario;
-    this.guardarTokens(token);
+    this.guardarToken(token.token);
+    this.guardarNomeDeUsuario(token.nomeDeUsuario);
+    this.guardarPerfis(token.perfis);
 
   }
 
 
-  private guardarTokens(token: any) : void {
+  private guardarToken(token: string) : void {
     localStorage.setItem(this.JWT_TOKEN,token);
   }
 
-
-  public logout(){
-    localStorage.removeItem(this.JWT_TOKEN);
+  private guardarNomeDeUsuario(nomeDeUsuario : string){
+    localStorage.setItem(this.NOME_DE_USUARIO,nomeDeUsuario);
   }
 
+  private guardarPerfis(perfis : Perfil[]){
+    localStorage.setItem(this.PERFIS,JSON.stringify(perfis));
+  }
 
-  public getToken(){
+  public getPerfisDoUsuarioLogado() : Perfil[] {
+    return JSON.parse(localStorage.getItem(this.PERFIS));
+  }
+
+  public getNomeDoUsuarioLogado() : string {
+    return JSON.parse(localStorage.getItem(this.NOME_DE_USUARIO));
+  }
+  public getToken() : string{
     return localStorage.getItem(this.JWT_TOKEN);
   }
+
+  public logout(){
+    localStorage.clear();
+  }
+
 
 
 

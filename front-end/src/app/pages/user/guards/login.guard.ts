@@ -5,22 +5,23 @@ import { AutenticacaoServiceService } from '../services/autenticacao-service.ser
 @Injectable({
   providedIn: 'root'
 })
-export class AutenticacaoGuardGuard implements CanActivate {
-
-
+export class LoginGuard implements CanActivate {
+  
+  
   constructor(
     private autenticacaoService: AutenticacaoServiceService,
     private router: Router
   ) {}
-
+  
+  
   canActivate() {
 
-    if (!this.autenticacaoService.usuarioEstaLogado()) {
-      return this.router.navigate(['/']);
+    if(!this.autenticacaoService.usuarioEstaLogado()){
+      return true;
     }
 
-    return true;
-
+    return this.router.navigate(['/home']);
+  
   }
-
+  
 }
